@@ -1,12 +1,17 @@
 import React from 'react'
 import { Button, StyleSheet, Text, View } from 'react-native'
 
+import { CATEGORIES } from '../data/dummy-data'
 
 const CategoryMealsScreen = props => {
+  const id = props.navigation.getParam('id')
+
+  const selectedCategory = CATEGORIES.find(category => category.id === id)
+
   return (
     <View style={styles.screen}>
       <Text>
-        All Meals In This Category
+        Category: {selectedCategory.title}
       </Text>
       <Button
         title="Check Details"
@@ -21,6 +26,15 @@ const CategoryMealsScreen = props => {
       />
     </View>
   )
+}
+
+CategoryMealsScreen.navigationOptions = navigationData => {
+  const id = navigationData.navigation.getParam('id')
+  const selectedCategory = CATEGORIES.find(category => category.id === id)
+
+  return {
+    headerTitle: selectedCategory.title
+  }
 }
 
 const styles = StyleSheet.create({
