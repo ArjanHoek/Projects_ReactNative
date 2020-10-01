@@ -1,22 +1,18 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
 
 import { enableScreens } from 'react-native-screens'
 
 import * as Font from 'expo-font'
+import fonts from './constants/fonts'
+
 import { AppLoading } from 'expo'
 import MealsNavigator from './navigation/MealsNavigator';
 
 enableScreens();
 
-const fetchFonts = () => {
-  Font.loadAsync({
-    'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
-    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf')
-  })
-}
+const fetchFonts = () => Font.loadAsync(fonts)
 
-export default function App() {
+const App = () => {
   const [fontLoaded, setFontLoaded] = useState(false)
 
   const loadFontsComponent = (
@@ -26,11 +22,11 @@ export default function App() {
     />
   )
 
-  if (!fontLoaded) {
-    return loadFontsComponent
-  }
-
   const output = <MealsNavigator />
 
-  return output
+  return !fontLoaded
+    ? loadFontsComponent
+    : output
 }
+
+export default App
