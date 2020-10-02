@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Platform } from 'react-native'
+import { Platform, Text } from 'react-native'
 import { createAppContainer } from 'react-navigation'
 
 import { createStackNavigator } from 'react-navigation-stack'
@@ -24,6 +24,12 @@ const defaultNavigationOptions = {
     backgroundColor: Platform.OS === "android"
       ? colors.primaryColor
       : colors.transparent
+  },
+  headerTitleStyle: {
+    fontFamily: "bold"
+  },
+  headerBackTitleStyle: {
+    fontFamily: "regular"
   },
   headerTintColor: Platform.OS === "android"
     ? colors.light
@@ -56,7 +62,9 @@ const tabScreenConfig = {
   MealsNavigator: {
     screen: MealsNavigator,
     navigationOptions: {
-      tabBarLabel: "All Meals",
+      tabBarLabel: Platform.OS === "android"
+        ? <Text style={{ fontFamily: "bold" }}>All Meals</Text>
+        : "All Meals",
       tabBarColor: colors.primaryColor,
       tabBarIcon: tabInfo => (
         <Ionicons
@@ -69,7 +77,9 @@ const tabScreenConfig = {
   }, FavoritesNavigator: {
     screen: FavoritesNavigator,
     navigationOptions: {
-      tabBarLabel: "Favorites",
+      tabBarLabel: Platform.OS === "android"
+        ? <Text style={{ fontFamily: "bold" }}>Favorites</Text>
+        : "Favorites",
       tabBarColor: colors.secondaryColor,
       tabBarIcon: tabInfo => (
         <Ionicons
@@ -83,11 +93,25 @@ const tabScreenConfig = {
 }
 
 const androidTabNavigator = createMaterialBottomTabNavigator(
-  tabScreenConfig, { activeColor: colors.light, shifting: true }
+  tabScreenConfig,
+  {
+    activeColor: colors.light,
+    shifting: true,
+    barStyle: {
+      backgroundColor: colors.primaryColor
+    }
+  }
 )
 
 const iosTabNavigator = createBottomTabNavigator(
-  tabScreenConfig, { tabBarOptions: { activeTintColor: colors.secondaryColor } }
+  tabScreenConfig, {
+  tabBarOptions: {
+    labelStyle: {
+      fontFamily: "bold"
+    },
+    activeTintColor: colors.secondaryColor
+  }
+}
 )
 
 const TabNavigator = Platform.OS === 'android' ? androidTabNavigator : iosTabNavigator

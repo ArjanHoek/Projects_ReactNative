@@ -5,6 +5,7 @@ export default {
   light: "#fff",
   dark: "#333",
   veryLightGrey: "#f5f5f5",
+  lightGrey: "#ccc",
 
   darkOpaque: "rgba(0, 0, 0, 0.5)",
 
