@@ -1,0 +1,4 @@
+export const TOGGLE_FAVORITE = "TOGGLE_FAVORITE"
+
+export const SET_FILTERS = "SET_FILTERS"
+

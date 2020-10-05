@@ -5,6 +5,8 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import colors from '../constants/colors'
 
 import CustomHeaderButton from '../components/CustomHeaderButton'
+import { useDispatch } from 'react-redux'
+import { setFilters } from '../store/actions/meals'
 
 const CustomSwitch = props => {
   return (
@@ -33,6 +35,8 @@ const FiltersScreen = props => {
   const [isVegan, setIsVegan] = useState(false)
   const [isVegetarian, setIsVegetarian] = useState(false)
 
+  const dispatch = useDispatch()
+
   const saveFilters = useCallback(() => {
     const appliedFilters = {
       isGlutenFree,
@@ -40,8 +44,8 @@ const FiltersScreen = props => {
       isVegan,
       isVegetarian
     }
-    console.log(appliedFilters);
-  }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian])
+    dispatch(setFilters(appliedFilters))
+  }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian, dispatch])
 
   useEffect(() => {
     navigation.setParams({ saveFilters })
@@ -87,17 +91,18 @@ FiltersScreen.navigationOptions = navigationData => {
         <Item
           title="Menu"
           iconName="md-menu"
-          onPress={() => navigationData.navigation.toggleDrawer()}
+          onPress={() =>
+            navigationData.navigation.toggleDrawer()}
         />
       </HeaderButtons>
     ),
     headerRight: () => (
-      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}      >
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
           title="Save"
           iconName="ios-save"
-          onPress={() => navigationData.navigation
-            .getParam("saveFilters")()}
+          onPress={() =>
+            navigationData.navigation.getParam("saveFilters")()}
         />
       </HeaderButtons>
     )
