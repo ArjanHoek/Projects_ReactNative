@@ -2,9 +2,12 @@ export default {
   light: "#fff",
   dark: "#333",
 
-  lightGrey: "#ccc",
+  lightGrey: "#E5E8E8",
+  mediumGrey: "#ccc",
 
-  orange: "#BA4A00",
+  orange: "#F5B041",
+  yellow: "#F9E79F",
+  green: "#186A3B",
 
   transparent: "transparent"
 }

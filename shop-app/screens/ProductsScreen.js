@@ -1,19 +1,22 @@
 import React from 'react'
 import { FlatList } from 'react-native'
+import { useSelector } from 'react-redux'
 
 import Product from '../components/Product'
 
-import PRODUCTS from '../data/dummy-data'
-
-import { enableScreens } from 'react-native-screens'
-enableScreens();
-
 const ProductsScreen = props => {
+  const products = useSelector(state => state.products.products)
+
   const output = (
     <FlatList
       keyExtractor={product => product.id}
-      renderItem={product => <Product navigation={props.navigation} item={product.item} />}
-      data={PRODUCTS}
+      renderItem={product => (
+        <Product
+          navigation={props.navigation}
+          item={product.item}
+        />
+      )}
+      data={products}
     />
   )
 

@@ -19,7 +19,7 @@ const ProductsNavigator = createStackNavigator(
     initialRouteName: "ProductsScreen",
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: colors.orange,
+        backgroundColor: colors.green,
       },
       headerTintColor: colors.light
     }
