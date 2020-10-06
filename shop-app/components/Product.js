@@ -1,5 +1,6 @@
 import React from 'react'
 import { ImageBackground, StyleSheet, Text, View } from 'react-native'
+import CustomButton from './CustomButton'
 
 const Product = props => (
   <View style={styles.container}>
@@ -19,9 +20,19 @@ const Product = props => (
             style={{ ...styles.detail, ...styles.price }}
           >€{props.item.price}</Text>
         </View>
-
       </View>
+
     </ImageBackground>
+    <View style={styles.buttonContainer}>
+      <CustomButton
+        title="Details"
+        onPress={() => props.navigation.navigate({
+          routeName: "ProductDetailsScreen",
+          params: { id: props.item.id }
+        })}
+      />
+      <CustomButton title="Add To Cart" />
+    </View>
   </View>
 )
 
@@ -35,7 +46,7 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     padding: 10,
-    backgroundColor: "rgba(255, 255, 255, 0.7)"
+    backgroundColor: "rgba(255, 255, 255, 0.8)"
   },
   detail: {
     margin: 2
@@ -47,20 +58,23 @@ const styles = StyleSheet.create({
     fontStyle: "italic"
   },
   priceContainer: {
-    flex: 1,
-    alignItems: "flex-end",
-    borderRadius: 20,
-
+    alignItems: "flex-end"
   },
   price: {
     backgroundColor: "black",
     color: "white",
-    padding: 5,
+    borderRadius: 20,
+    padding: 5
   },
 
   backgroundImage: {
     width: "100%",
     height: 200
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+
   }
 })
 

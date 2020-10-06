@@ -12,7 +12,7 @@ const ProductsScreen = props => {
   const output = (
     <FlatList
       keyExtractor={product => product.id}
-      renderItem={Product}
+      renderItem={product => <Product navigation={props.navigation} item={product.item} />}
       data={PRODUCTS}
     />
   )

@@ -2,7 +2,7 @@ import { createAppContainer } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 
 import ProductsScreen from '../screens/ProductsScreen'
-import ProductsDetailsScreen from '../screens/ProductDetailsScreen'
+import ProductDetailsScreen from '../screens/ProductDetailsScreen'
 import OrderScreen from '../screens/OrderScreen'
 
 import colors from '../constants/colors'
@@ -11,7 +11,7 @@ import colors from '../constants/colors'
 const ProductsNavigator = createStackNavigator(
   {
     ProductsScreen,
-    ProductsDetailsScreen
+    ProductDetailsScreen
     // OrderScreen
   },
   {
