@@ -1,44 +1,57 @@
 import React from 'react'
 import { ImageBackground, StyleSheet, Text, View } from 'react-native'
+import { useDispatch } from 'react-redux'
 import colors from '../constants/colors'
 import CustomButton from './CustomButton'
 
-const Product = props => (
-  <View style={styles.container}>
-    <ImageBackground
-      style={styles.backgroundImage}
-      source={{ uri: props.item.imageUrl }}
-    >
-      <View style={styles.textContainer}>
-        <View style={styles.productHeader}>
+import { addToCart } from '../store/actions/shoppingCart'
+
+const Product = props => {
+  const dispatch = useDispatch()
+
+  const output = (
+    <View style={styles.container}>
+      <ImageBackground
+        style={styles.backgroundImage}
+        source={{ uri: props.item.imageUrl }}
+      >
+        <View style={styles.textContainer}>
+          <View style={styles.productHeader}>
+            <Text
+              style={{ ...styles.detail, ...styles.title }}
+            >{props.item.title}</Text>
+            <Text
+              style={{ ...styles.detail, ...styles.price }}
+            >€{props.item.price}</Text>
+          </View>
+
           <Text
-            style={{ ...styles.detail, ...styles.title }}
-          >{props.item.title}</Text>
-          <Text
-            style={{ ...styles.detail, ...styles.price }}
-          >€{props.item.price}</Text>
+            style={{ ...styles.detail, ...styles.description }}
+          >{props.item.description}</Text>
+
         </View>
 
-        <Text
-          style={{ ...styles.detail, ...styles.description }}
-        >{props.item.description}</Text>
+        <View style={styles.buttonContainer}>
+          <CustomButton
+            title="Details"
+            onPress={() => props.navigation.navigate({
+              routeName: "ProductDetailsScreen",
+              params: { id: props.item.id }
+            })}
+          />
+          <CustomButton
+            title="Add To Cart"
+            onPress={() => dispatch(addToCart(props.item.id))}
+          />
+        </View>
+      </ImageBackground>
+    </View>
+  )
 
-      </View>
+  return output
+}
 
-      <View style={styles.buttonContainer}>
-        <CustomButton
-          title="Details"
-          onPress={() => props.navigation.navigate({
-            routeName: "ProductDetailsScreen",
-            params: { id: props.item.id }
-          })}
-        />
-        <CustomButton title="Add To Cart" />
-      </View>
-    </ImageBackground>
 
-  </View>
-)
 
 const styles = StyleSheet.create({
   container: {

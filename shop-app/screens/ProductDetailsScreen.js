@@ -1,21 +1,35 @@
 import React from 'react'
 import { StyleSheet, Text, Image, ScrollView, View } from 'react-native'
-import { useSelector } from 'react-redux'
+
+import { useDispatch, useSelector } from 'react-redux'
+
+import { addToCart } from '../store/actions/shoppingCart'
+
+import CustomButton from '../components/CustomButton'
+
 import colors from '../constants/colors'
 
-const Screen = props => {
+const ProductDetailsScreen = ({ navigation }) => {
+  const dispatch = useDispatch()
+
   const products = useSelector(state => state.products.products)
-  const id = props.navigation.getParam("id")
+  const id = navigation.getParam("id")
   const selectedProduct = products.find(product => product.id === id)
+
+  const { title, description, price, imageUrl } = selectedProduct
 
   const output = (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>{selectedProduct.title}</Text>
-      <Text style={styles.description}>{selectedProduct.description}</Text>
+      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.price}>€{price}</Text>
+      <Text style={styles.description}>{description}</Text>
       <View style={styles.imageContainer}>
-        <Image style={styles.image} source={{ uri: selectedProduct.imageUrl }} />
-
+        <Image style={styles.image} source={{ uri: imageUrl }} />
       </View>
+      <CustomButton
+        title="Add To Cart"
+        onPress={() => dispatch(addToCart(id))}
+      />
     </ScrollView>
   )
 
@@ -51,7 +65,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     paddingVertical: 5,
     paddingHorizontal: 10,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    textAlign: "center"
   },
 
   image: {
@@ -79,4 +94,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Screen
+export default ProductDetailsScreen

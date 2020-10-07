@@ -4,7 +4,7 @@ import { Text, View } from 'react-native'
 const Screen = props => {
   return (
     <View>
-      <Text>Screen Content</Text>
+      <Text>Content</Text>
     </View>
   )
 }

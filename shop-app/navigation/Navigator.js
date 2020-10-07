@@ -3,28 +3,52 @@ import { createStackNavigator } from 'react-navigation-stack'
 
 import ProductsScreen from '../screens/ProductsScreen'
 import ProductDetailsScreen from '../screens/ProductDetailsScreen'
-import OrderScreen from '../screens/OrderScreen'
+import ShoppingCartScreen from '../screens/ShoppingCartScreen'
+import OrdersScreen from '../screens/OrdersScreen'
 
 import colors from '../constants/colors'
+import { createDrawerNavigator } from 'react-navigation-drawer'
 
+const defaultNavigationOptions = {
+  headerStyle: {
+    backgroundColor: colors.green,
+  },
+  headerTintColor: colors.light
+}
 
 const ProductsNavigator = createStackNavigator(
   {
     ProductsScreen,
-    ProductDetailsScreen
-    // OrderScreen
+    ProductDetailsScreen,
+    ShoppingCartScreen
   },
   {
     mode: "modal",
     initialRouteName: "ProductsScreen",
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: colors.green,
-      },
-      headerTintColor: colors.light
-    }
+    defaultNavigationOptions
   }
 )
 
+const OrdersNavigator = createStackNavigator(
+  { OrdersScreen },
+  { defaultNavigationOptions }
+)
 
-export default createAppContainer(ProductsNavigator)
+
+const MainNavigator = createDrawerNavigator({
+  ProductsNavigator: {
+    screen: ProductsNavigator,
+    navigationOptions: {
+      drawerLabel: "Products"
+    }
+  },
+  OrdersNavigator: {
+    screen: OrdersNavigator,
+    navigationOptions: {
+      drawerLabel: "Orders"
+    }
+  }
+})
+
+
+export default createAppContainer(MainNavigator)
