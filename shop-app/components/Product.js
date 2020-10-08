@@ -56,16 +56,16 @@ const Product = props => {
 const styles = StyleSheet.create({
   container: {
     margin: 10,
-    borderColor: "black",
+    borderColor: colors.black,
     borderRadius: 20,
     overflow: "hidden",
     borderWidth: 2,
-    borderColor: colors.dark
+    borderColor: colors.black
 
   },
   textContainer: {
     padding: 10,
-    backgroundColor: "rgba(255, 255, 255, 0.85)"
+    backgroundColor: colors.transparentWhite
   },
   detail: {
     margin: 2
@@ -78,8 +78,8 @@ const styles = StyleSheet.create({
     fontStyle: "italic"
   },
   price: {
-    backgroundColor: colors.dark,
-    color: colors.light,
+    backgroundColor: colors.black,
+    color: colors.white,
     borderRadius: 20,
     paddingVertical: 5,
     paddingHorizontal: 10,

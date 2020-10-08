@@ -6,3 +6,10 @@ export const addToCart = id => {
     id
   }
 }
+
+export const removeFromCart = id => {
+  return {
+    type: actionTypes.REMOVE_FROM_CART,
+    id
+  }
+}

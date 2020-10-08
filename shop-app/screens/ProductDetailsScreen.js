@@ -20,16 +20,23 @@ const ProductDetailsScreen = ({ navigation }) => {
 
   const output = (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.price}>€{price}</Text>
-      <Text style={styles.description}>{description}</Text>
+      <View style={styles.textContainer}>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.price}>€{price}</Text>
+        <Text style={styles.description}>{description}</Text>
+      </View>
+
       <View style={styles.imageContainer}>
         <Image style={styles.image} source={{ uri: imageUrl }} />
       </View>
-      <CustomButton
-        title="Add To Cart"
-        onPress={() => dispatch(addToCart(id))}
-      />
+      <View style={styles.buttonContainer}>
+        <CustomButton
+          style={styles.button}
+          titleStyle={styles.buttonTitle}
+          title="Add To Cart"
+          onPress={() => dispatch(addToCart(id))}
+        />
+      </View>
     </ScrollView>
   )
 
@@ -38,14 +45,17 @@ const ProductDetailsScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    margin: 10,
-    backgroundColor: colors.mediumGrey,
-    padding: 20,
+    margin: 15,
+    backgroundColor: colors.lightGrey,
+    padding: 15,
     borderRadius: 15
   },
   textContainer: {
     padding: 10,
-    backgroundColor: "rgba(255, 255, 255, 0.85)"
+    backgroundColor: "rgba(255, 255, 255, 0.85)",
+    borderRadius: 15,
+    borderWidth: 2,
+    borderColor: colors.transparentWhite
   },
   detail: {
     margin: 2
@@ -74,23 +84,28 @@ const styles = StyleSheet.create({
     height: 250,
   },
   imageContainer: {
-    marginVertical: 20,
-    marginHorizontal: 10,
-    borderRadius: 20,
+    margin: 20,
+    borderRadius: 15,
     overflow: "hidden",
     borderWidth: 2,
-    borderColor: colors.dark
+    borderColor: colors.transparentWhite
   },
 
   buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    padding: 10
+    padding: 15,
 
   },
   productHeader: {
     flexDirection: "row",
     justifyContent: "space-between"
+  },
+  button: {
+    backgroundColor: colors.darkGreen,
+    borderWidth: 1,
+    borderColor: colors.transparentWhite
+  },
+  buttonTitle: {
+    color: colors.white
   }
 })
 
