@@ -4,14 +4,13 @@ import colors from '../constants/colors'
 
 import { Ionicons } from '@expo/vector-icons'
 
-
 const CustomHeaderButton = props => {
   return (
     <HeaderButton
       {...props}
       IconComponent={Ionicons}
       iconSize={23}
-      color={colors.black}
+      color={colors.white}
     />
   )
 }

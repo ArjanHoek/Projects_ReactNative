@@ -13,12 +13,9 @@ const CustomButton = props => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 20,
-    paddingVertical: 5,
+    padding: 5,
     backgroundColor: colors.lightGrey,
     borderRadius: 15,
-    borderColor: colors.black,
-    borderWidth: 2
   },
   title: {
     width: "100%",

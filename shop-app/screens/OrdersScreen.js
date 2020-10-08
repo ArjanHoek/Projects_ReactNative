@@ -1,14 +1,25 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
+import { useSelector } from 'react-redux'
 import CustomHeaderButton from '../components/CustomHeaderButton'
 
 const OrdersScreen = props => {
-  return (
+  const orders = useSelector(state => state.orders.orders)
+
+  const placeHolder = (
     <View style={styles.container}>
-      <Text>All Orders</Text>
+      <Text>No orders to display</Text>
     </View>
   )
+
+  const output = (
+    <View>
+      <Text>{orders.length} orders</Text>
+    </View>
+  )
+
+  return orders.length ? output : placeHolder
 }
 
 const styles = StyleSheet.create({
@@ -21,7 +32,7 @@ const styles = StyleSheet.create({
 
 OrdersScreen.navigationOptions = navigationData => {
   return {
-    headerTitle: "Products",
+    headerTitle: "Orders",
     headerLeft: () => (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item

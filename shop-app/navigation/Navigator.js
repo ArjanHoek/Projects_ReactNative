@@ -11,9 +11,10 @@ import { createDrawerNavigator } from 'react-navigation-drawer'
 
 const defaultNavigationOptions = {
   headerStyle: {
-    backgroundColor: colors.darkYellow,
+    backgroundColor: colors.black,
+
   },
-  headerTintColor: colors.white
+  headerTintColor: colors.white,
 }
 
 const ProductsNavigator = createStackNavigator(

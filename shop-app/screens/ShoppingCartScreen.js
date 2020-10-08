@@ -2,9 +2,15 @@ import React, { useEffect } from 'react'
 import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import { useDispatch, useSelector } from 'react-redux'
-import CartItem from '../components/CartItem'
+import Product from '../components/Product'
 import CustomHeaderButton from '../components/CustomHeaderButton'
+
 import { addToCart, removeFromCart } from '../store/actions/shoppingCart'
+import { addOrder } from '../store/actions/orders'
+
+
+import CustomButton from '../components/CustomButton'
+import colors from '../constants/colors'
 
 const ShoppingCartScreen = props => {
   const dispatch = useDispatch()
@@ -17,15 +23,23 @@ const ShoppingCartScreen = props => {
   const productComponents = productsInCart.map(id => {
     const product = products.find(product => product.id === id)
     const amount = shoppingCart[id]
-    const onPress = {
-      add: () => dispatch(addToCart(id)),
-      remove: () => dispatch(removeFromCart(id))
-    }
     return (
-      <CartItem
-        product={product}
+      <Product
+        navigation={props.navigation}
         amount={amount}
-        onPress={onPress}
+        item={product}
+        buttons={
+          [
+            {
+              title: "-1",
+              onPress: () => dispatch(removeFromCart(id))
+            },
+            {
+              title: "+1",
+              onPress: () => dispatch(addToCart(id))
+            }
+          ]
+        }
       />
     )
   })
@@ -48,7 +62,20 @@ const ShoppingCartScreen = props => {
   )
 
   const output = (
-    <ScrollView>{productComponents}</ScrollView>
+    <View>
+      <CustomButton
+        style={styles.orderButton}
+        title="Order Now"
+        onPress={() => {
+          console.log(shoppingCart)
+          dispatch(addOrder(shoppingCart))
+        }}
+      />
+
+      <ScrollView style={styles.cartItems}>
+        {productComponents}
+      </ScrollView>
+    </View>
   )
 
   return productsInCart.length ? output : placeHolder
@@ -60,12 +87,22 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center"
+  },
+  orderButton: {
+    borderRadius: 0,
+    backgroundColor: colors.lightGrey,
+    borderBottomColor: colors.black,
+    borderBottomWidth: 1
+  },
+  cartItems: {
+    marginBottom: 30
   }
 })
 
 ShoppingCartScreen.navigationOptions = navigationData => {
   const totalPrice = navigationData.navigation.getParam("totalPrice")
   return {
+    headerTitle: "Your Order",
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item title={"€" + (totalPrice || 0).toFixed(2)} />

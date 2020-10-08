@@ -3,12 +3,16 @@ import { FlatList } from 'react-native'
 
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import CustomHeaderButton from '../components/CustomHeaderButton'
 import Product from '../components/Product'
 
+import { addToCart } from '../store/actions/shoppingCart'
+
 const ProductsScreen = props => {
+  const dispatch = useDispatch()
+
   const products = useSelector(state => state.products.products)
 
   const shoppingCartItems = useSelector(state => state.shoppingCart.shoppingCart)
@@ -31,6 +35,21 @@ const ProductsScreen = props => {
         <Product
           navigation={props.navigation}
           item={product.item}
+          buttons={
+            [
+              {
+                title: "Details",
+                onPress: () => props.navigation.navigate({
+                  routeName: "ProductDetailsScreen",
+                  params: { id: product.item.id }
+                })
+              },
+              {
+                title: "Add To Cart",
+                onPress: () => dispatch(addToCart(product.item.id))
+              }
+            ]
+          }
         />
       )}
       data={products}

@@ -46,13 +46,12 @@ const ProductDetailsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     margin: 15,
-    backgroundColor: colors.lightGrey,
     padding: 15,
     borderRadius: 15
   },
   textContainer: {
-    padding: 10,
-    backgroundColor: "rgba(255, 255, 255, 0.85)",
+    padding: 15,
+    backgroundColor: colors.darkRed,
     borderRadius: 15,
     borderWidth: 2,
     borderColor: colors.transparentWhite
@@ -63,16 +62,22 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "bold",
     fontSize: 24,
-    textAlign: "center"
+    textAlign: "center",
+    color: colors.white
+
   },
   description: {
     fontStyle: "italic",
-    textAlign: "center"
+    textAlign: "center",
+    color: colors.white,
+    fontSize: 16,
+    marginHorizontal: 40
   },
   price: {
-    backgroundColor: colors.dark,
-    color: colors.light,
-    borderRadius: 20,
+    margin: 15,
+    backgroundColor: colors.white,
+    color: colors.black,
+    borderRadius: 15,
     paddingVertical: 5,
     paddingHorizontal: 10,
     fontWeight: "bold",
@@ -84,7 +89,7 @@ const styles = StyleSheet.create({
     height: 250,
   },
   imageContainer: {
-    margin: 20,
+    marginVertical: 15,
     borderRadius: 15,
     overflow: "hidden",
     borderWidth: 2,
@@ -92,7 +97,6 @@ const styles = StyleSheet.create({
   },
 
   buttonContainer: {
-    padding: 15,
 
   },
   productHeader: {
@@ -102,7 +106,8 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: colors.darkGreen,
     borderWidth: 1,
-    borderColor: colors.transparentWhite
+    borderColor: colors.transparentWhite,
+    padding: 10
   },
   buttonTitle: {
     color: colors.white
